@@ -1,0 +1,123 @@
+﻿@using MVCExport.Resources 
+
+@model MVCExport.Models.EmployeeDetailsItemViewModel
+@{
+    Layout = null;
+}
+<script>
+    function employeeEditVM($scope, $rootScope)
+    {
+        $rootScope.title=@Html.Raw( Model.FirstName);
+        $scope.vieModel= @Html.Raw(Html.ToJson(Model));
+
+    }
+
+</script>
+
+<div ng-controller="employeeEditVM">
+
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", name = "loginform", @novalidate = "" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger", @id = "validationSummary" })
+        @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.TitleOfCourtesy, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.titleOfCourtesy" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <span class="form-control" id="FirstName" ng-model="vieModel.firstName"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.firstName" />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="LastName" name="LastName" readonly ng-model="vieModel.title" />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.BirthDate, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.birthDate| date:'MMM-dd,yyyy' " />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.HireDate, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.hireDate| date:'MMM-dd,yyyy' " />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.address " />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.address " />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.City, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.city " />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Region, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.region " />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PostalCode, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.postalCode " />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Country, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.country " />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.HomePhone, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.homePhone " />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Country, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <textarea class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.notes "></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Manager, new { @class = "col-md-3 control-label" })
+        <div class="col-md-8">
+            <input class="form-control" id="FirstName" name="FirstName" readonly ng-model="vieModel.manager " />
+        </div>
+    </div>
+        <div class="form-group">
+            <!-- Buttons -->
+            <div class="col-md-8 col-md-offset-3">
+                <button type="submit" class="btn btn-theme btn-subscribe" ng-class="{disabled:!loginform.$valid}" id="submitbtn">@Messages.Save</button>
+            </div>
+        </div>
+
+    }
+</div>

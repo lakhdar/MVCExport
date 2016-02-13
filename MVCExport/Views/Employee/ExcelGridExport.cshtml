@@ -1,0 +1,72 @@
+﻿@using MVCExport.Resources
+@model MVCExport.Models.EmployeeListViewModel
+@{
+    Layout = null;
+}
+
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+    <title></title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+    <meta name="ProgId" content="Excel.Sheet"/>
+    <meta name="Generator" content="Microsoft Excel 11"/>
+    <!--[if gte mso 9]>
+    <xml>
+    <x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+    <x:Name>
+     @Messages.Employees
+    </x:Name>
+    <x:WorksheetOptions>
+    <x:DisplayGridlines/>
+    </x:WorksheetOptions>
+    </x:ExcelWorksheet>
+    </x:ExcelWorksheets>
+    </x:ExcelWorkbook>
+    </xml>
+    <![endif]-->
+    <style>
+        thead th{
+            background:red;
+            color:white
+        }
+        caption{
+           background:blue;
+            color:white;
+            font-weight:bold
+        }
+    </style> 
+
+</head>
+<body>
+    <table>
+        <caption>
+            @Messages.Employees 
+        </caption>
+        <thead valign="top" >
+            <tr>
+                @foreach (var head in @Model.Headers)
+                {
+                    <th >@head</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var items in @Model.Data)
+            {
+               <tr> 
+              @foreach (var item in @items)
+              {
+                <th>@item</th>
+              }
+               </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" align="right"><strong>@Messages.Total : </strong>@Model.Total</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

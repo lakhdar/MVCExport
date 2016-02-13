@@ -1,0 +1,17 @@
+﻿@using MVCExport.Resources
+@{
+    Layout = null;
+}
+
+<script>
+    function contactVM($scope, $rootScope) {
+        $rootScope.title = "@Messages.About";
+    }
+</script>
+
+<div ng-controller="contactVM">
+    <h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
+
+    <p>Use this area to provide additional information.</p>
+</div>

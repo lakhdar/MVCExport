@@ -1,0 +1,34 @@
+﻿@using MVCExport.Resources 
+@{
+    Layout = null;
+}
+<script>
+    function homeVM($scope,$rootScope) {
+        $rootScope.title="@Messages.Home";
+    }
+</script>
+
+<div ng-controller="homeVM">
+    <div class="jumbotron">
+        <h1>Export grid demo app</h1>
+        <p class="lead">Differents ways to Export data grid </p>
+        <p><a href="javascript:;" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>@Messages.Employees</h2>
+            <p>
+                Employees grid 
+            </p>
+            <p><a href="#/Employee" class="btn btn-primary btn-lg ">@Messages.View</a>
+           </p> 
+            
+        </div>
+        <div class="col-md-4">
+            <h2>@Messages.Customers</h2>
+            <p> Customers grid</p>
+            <p>@Html.ActionLink(Messages.View, "index", "Employee", null, new { @class = "btn btn-primary btn-lg" })</p> 
+        </div>
+    </div>
+</div>

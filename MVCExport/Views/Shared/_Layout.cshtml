@@ -1,0 +1,74 @@
+﻿@using MVCExport.Resources
+@{
+
+    bool isIE8 = (Request.Browser.Browser == "IE") && ((Request.Browser.MajorVersion == 8));
+    bool isIE9 = (Request.Browser.Browser == "IE") && ((Request.Browser.MajorVersion == 9));
+    string htmlClass = isIE8 ? "ie8" : isIE9 ? "ie9" : "";
+
+}
+
+<!DOCTYPE html>
+<html lang="en" class="@htmlClass" ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base href="@Url.Content("~/")" />
+    <link rel="shortcut icon" href="favicon.ico">
+    @Styles.Render("~/Content/css")
+
+    @if (isIE8)
+    {
+        @Scripts.Render("~/bundles/ieshim")
+    }
+
+    <title>{{title}}</title>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/home">@Messages.Home</a></li>
+                   
+
+                    <li><a href="#/about">@Messages.About</a></li>
+                    <li><a href="#/contact">@Messages.Contact</a></li>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        
+        <footer>
+            <p>&copy; @DateTime.Now.Year - MCV export grid demo Application</p>
+        </footer>
+    </div>
+
+    @if (isIE8)
+    {
+        @Scripts.Render("~/bundles/scriptsLegacybrowser")
+    }
+    else
+    {
+        @Scripts.Render("~/bundles/scripts")
+    }
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

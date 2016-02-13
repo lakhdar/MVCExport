@@ -1,0 +1,53 @@
+﻿@using MVCExport.Resources
+@model MVCExport.Models.EmployeeListViewModel
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>@Messages.Employees </title>
+    <style>
+        thead th{
+            background:red;
+            color:white
+        }
+        caption{
+           background:blue;
+            color:white;
+            font-weight:bold
+        }
+    </style> 
+</head>
+<body>
+    <table>
+        <caption>
+            @Messages.Employees 
+        </caption>
+        <thead valign="top" >
+            <tr>
+                @foreach (var head in @Model.Headers)
+                {
+                    <th >@head</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var items in @Model.Data)
+            {
+               <tr> 
+              @foreach (var item in @items)
+              {
+                <th>@item</th>
+              }
+               </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" align="right"><strong>@Messages.Total : </strong>@Model.Total</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

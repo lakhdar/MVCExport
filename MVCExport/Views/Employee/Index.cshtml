@@ -1,0 +1,88 @@
+﻿@using MVCExport.Resources 
+@model MVCExport.Models.EmployeeListViewModel
+@{
+    Layout = null;
+}
+<script>
+    function employeeListVM($scope,$rootScope) {
+        $rootScope.title="@Messages.Employees";
+        $scope.vieModel= @Html.Raw(Html.ToJson(Model));
+        $scope.sortby = function (item) {
+            return item[$scope.orderBy];
+        }
+    }
+</script>
+
+<div ng-controller="employeeListVM">
+
+    <h2>@Messages.Employees</h2>
+    <br />
+     
+    <p><strong>@Messages.Total : </strong>{{vieModel.total}}</p>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-2"> 
+          <p>
+              @Html.ActionLink(Messages.ExportCSV, "MyExportCSV", null, new { @class = "btn btn-primary btn-mini" }) 
+           </p>
+        </div>
+        <div class="col-md-3">
+            <p>
+              @Html.ActionLink(Messages.ExportCSVwithtransform, "MyCustomExportCSV", null, new { @class = "btn btn-primary" }) 
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p>
+               @Html.ActionLink("ExportExcelGridView", "ExportExcelGridView", null, new { @class = "btn btn-primary" }) 
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p>
+                @Html.ActionLink("ExportExcelGridViewWithMap", "ExportExcelGridViewWithMap", null, new { @class = "btn btn-primary" })
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p>
+                @Html.ActionLink("ExportExcelRazorView", "ExportExcelRazorView", null, new { @class = "btn btn-primary" })
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p>
+                @Html.ActionLink("ExcelExport", "ExcelExport", null, new { @class = "btn btn-primary" })
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p>
+                @Html.ActionLink("PdfExport", "PdfExport", null, new { @class = "btn btn-primary" })
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p>
+                @Html.ActionLink("RDLExport", "RDLExport", null, new { @class = "btn btn-primary" })
+            </p>
+        </div>
+    </div>
+    <br />
+    
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th ng-repeat="header in vieModel.headers"><a href="javascript:;" ng-click="$parent.orderBy=$index+1">{{header}}</a></th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="employee in vieModel.data| orderBy:sortby track by $index ">
+                    <td ng-repeat="item in employee.slice(1) track by $index" >{{item}}</td>
+                    <td>
+                        <a href="#/Employee/details/{{employee[0]}}" class="glyphicon glyphicon-eye-open">Details&#160;</a>
+                        <a href="#/Employee/details/{{employee[0]}}" class="glyphicon glyphicon-edit">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+          

@@ -1,0 +1,23 @@
+﻿@model MVCExport.Models.EmployeeListDetailsItemViewModel
+@{
+    Layout = null;
+}
+<script>
+    function employeeListVM($scope, $rootScope)
+    {
+        $rootScope.title="@Html.Raw(Model.Title)";
+        $scope.viewModel= @Html.Raw(Html.ToJson(Model));
+    }
+</script>
+
+<div ng-controller="employeeListVM" class="row" style="padding-top:50px">
+    <form class="form-horizontal">
+        <div class="form-group" ng-repeat="item in viewModel.employeeDetails ">
+            <label class=" col-md-3 control-label " style="padding-top:0">{{item.label}}</label>
+            <div class=" col-md-8 ">
+                <span class="" ng-if="item.dateType=='string'">{{item.value}}</span>
+                <img ng-src="data:image/png;base64,{{item.value}}" ng-if="item.dateType=='image'" />
+            </div>
+        </div>
+    </form>
+</div>
